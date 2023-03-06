@@ -15,6 +15,17 @@ exports.checkId = (req, res, next, val) => {
   next();
 };
 
+exports.checkPostBody = (req, res, next) => {
+  console.log(`request body: ${req.body}`);
+  if (!req.body || !req.body.name || !req.body.price) {
+    return res.status(400).json({
+      status: 'fail',
+      message: 'Invalid Request Body - Name and Price required',
+    });
+  }
+  next();
+};
+
 exports.getAllTours = (req, res) => {
   console.log(req.requestTime);
   res.status(200).json({
@@ -30,7 +41,7 @@ exports.getAllTours = (req, res) => {
 exports.getTour = (req, res) => {
   // console.log(req.params);
 
-  const tour = tours.find((tour) => tour.id === id);
+  const tour = tours.find((tour) => tour.id === req.params.id * 1);
   // console.log('tour:', tour);
   res.status(200).json({
     status: 'success',

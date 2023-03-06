@@ -15,6 +15,9 @@ app.use(morgan('dev'));
 // middleware = allows access to request; used to parse the data from the body
 app.use(express.json());
 
+// middleware = allows serving static files
+app.use(express.static(`${__dirname}/public`));
+
 // custom middleware = runs for every request as long as it's placed before the route handlers
 app.use((req, res, next) => {
   console.log('Hello from the middleware 👌');
