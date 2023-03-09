@@ -10,7 +10,9 @@ const app = express();
 // MIDDLEWARES
 
 // middleware = request logger
-app.use(morgan('dev'));
+if (process.env.NODE_ENV === 'development') {
+  app.use(morgan('dev'));
+}
 
 // middleware = allows access to request; used to parse the data from the body
 app.use(express.json());
