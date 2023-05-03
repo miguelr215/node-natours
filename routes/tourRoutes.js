@@ -95,12 +95,13 @@ const tourController = require('../controllers/tourController');
 const router = express.Router();
 
 // param middleware = only runs when specified param is supplied in api call
-router.param('id', tourController.checkId);
+// router.param('id', tourController.checkId);
 
 router
   .route('/')
   .get(tourController.getAllTours)
-  .post(tourController.checkPostBody, tourController.createTour);
+  .post(tourController.createTour);
+// .post(tourController.checkPostBody, tourController.createTour);
 router
   .route('/:id')
   .get(tourController.getTour)
