@@ -28,6 +28,13 @@ const Tour = require('./../models/tourModel');
 //   next();
 // };
 
+exports.aliasTopTours = (req, res, next) => {
+  req.query.limit = '5';
+  req.query.sort = '-ratingsAverage,price';
+  req.query.fields = 'name,price,ratingsAverage,summary,difficulty';
+  next();
+};
+
 exports.getAllTours = async (req, res) => {
   try {
     // console.log(req.requestTime);
@@ -83,7 +90,7 @@ exports.getAllTours = async (req, res) => {
     const page = req.query.page * 1 || 1;
     const limit = req.query.limit * 1 || 100;
     const skip = (page - 1) * limit;
-    console.log(`skip: ${skip}`);
+    // console.log(`skip: ${skip}`);
 
     query = query.skip(skip).limit(limit);
 
